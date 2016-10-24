@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://site.douban.com/182577/widget/notes/10568316/note/299186532/ -->
+<html lang="zh-CN" class=""><meta style="visibility: hidden !important; display: block !important; width: 0px !important; height: 0px !important; border-style: none !important;"><embed id="__IDM__" type="application/x-idm-downloader" width="1" height="1" style="visibility: hidden !important; display: block !important; width: 1px !important; height: 1px !important; border-style: none !important; position: absolute !important; top: 0px !important; left: 0px !important;"><script src="./构建基于R的交易系统(1)quantmod_files/ga.js.下载" async="true"></script></meta><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link type="text/css" rel="stylesheet" href="./构建基于R的交易系统(1)quantmod_files/jquery.ui.tooltip.css"><script type="text/javascript" src="./构建基于R的交易系统(1)quantmod_files/jquery.ui.tooltip.js.下载" async="true"></script>
+    
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="Sun, 6 Mar 2005 01:00:00 GMT">
+    <meta name="referrer" content="always">
+    
+    
+    <title>
+构建基于R的交易系统(1)quantmod
+</title>
+    
+<link type="text/css" rel="stylesheet" href="./构建基于R的交易系统(1)quantmod_files/dialog.css"><script type="text/javascript" src="./构建基于R的交易系统(1)quantmod_files/jquery.ui.min.js.下载" async="true"></script><script type="text/javascript" src="./构建基于R的交易系统(1)quantmod_files/dialog.js.下载" async="true"></script><script type="text/javascript" src="https://img3.doubanio.com/f/shire/0e535fd6bda0edba694334298335282ff5e9d954/js/ad.js" async="true"></script><script type="text/javascript" defer="" async="" src="./构建基于R的交易系统(1)quantmod_files/piwik.js.下载"></script><script async="" src="./构建基于R的交易系统(1)quantmod_files/gtm.js.下载"></script><script type="text/javascript" src="./构建基于R的交易系统(1)quantmod_files/common_eventhandler.js.下载" async="true"></script><script type="text/javascript" src="./构建基于R的交易系统(1)quantmod_files/common.js.下载" async="true"></script><script type="text/javascript" src="./构建基于R的交易系统(1)quantmod_files/jquery.min.js.下载" async="true"></script><script>!function(f){var h=function(o,n,m){var k=new Date(),j,l;n=n||30;m=m||"/";k.setTime(k.getTime()+(n*24*60*60*1000));j="; expires="+k.toGMTString();for(l in o){f.cookie=l+"="+o[l]+j+"; path="+m}},d=function(m){var l=m+"=",o,n,j,k=f.cookie.split(";");for(n=0,j=k.length;n<j;n++){o=k[n].replace(/^\s+|\s+$/g,"");if(o.indexOf(l)==0){return o.substring(l.length,o.length).replace(/\"/g,"")}}return null},e=f.write,b={"douban.com":1,"douban.fm":1,"google.com":1,"google.cn":1,"googleapis.com":1,"gmaptiles.co.kr":1,"gstatic.com":1,"gstatic.cn":1,"google-analytics.com":1,"googleadservices.com":1},a=function(l,k){var j=new Image();j.onload=function(){};j.src="https://www.douban.com/j/except_report?kind=ra022&reason="+encodeURIComponent(l)+"&environment="+encodeURIComponent(k)},i=function(k){try{e.call(f,k)}catch(j){e(k)}},c=/<script.*?src\=["']?([^"'\s>]+)/ig,g=/http:\/\/(.+?)\.([^\/]+).+/i;f.writeln=f.write=function(k){var j=c.exec(k),l;if(!j){i(k);return}l=g.exec(j[1]);if(!l){i(k);return}if(b[l[2]]){i(k);return}if(d("hj")==="tqs"){return}a(j[1],location.href);h({hj:"tqs"},1);setTimeout(function(){location.replace(location.href)},50)}}(document);</script>
+
+    <script type="text/javascript" src="./构建基于R的交易系统(1)quantmod_files/do.js.下载" data-cfg-corelib="https://img3.doubanio.com/f/shire/72ced6df41d4d158420cebdd254f9562942464e3/js/jquery.min.js"></script>
+    <script type="text/javascript">
+          Do.add('common', {path: 'https://img3.doubanio.com/f/shire/cbdbc18c58182d9ab8c745d6bb745cf62d8f9abd/js/site/common.js', type: 'js'});
+        Do.add('common-eventhandler', {path: 'https://img3.doubanio.com/f/shire/f1434558f4b407c58011a3d3c4c8b25a766126c2/js/site/common_eventhandler.js', type: 'js', requires: ['common']});
+        Do.add('setting-eventhandler', {path: 'https://img3.doubanio.com/f/shire/690eb7b083e4e086f2cfd0ab1313041785b8c1db/js/site/setting_eventhandler.js', type: 'js', requires: ['common']});
+        Do.add('dialog-css', {path: 'https://img3.doubanio.com/f/shire/8377b9498330a2e6f056d863987cc7a37eb4d486/css/ui/dialog.css', type: 'css'});
+        Do.add('dialog', {path: 'https://img3.doubanio.com/f/shire/4b3bad5e25de78678d700dd5353570dce3e6bbcc/js/ui/dialog.js', type: 'js', requires: ['dialog-css']});
+        Do.add('swf', {path: 'https://img3.doubanio.com/f/shire/b38e7b7bf607a06d0bc79a87736f0cde80d78e3c/js/swfobject.js', type: 'js'});
+        Do.add('video', {path: 'https://img3.doubanio.com/f/shire/f176e27c6467329451677143a5d5e94345b4cd48/js/site/video.js', type: 'js'});
+        Do.add('artist', {path: 'https://img3.doubanio.com/f/shire/6f282ed98f8a22369b06ede8d597fe1e3384ed84/js/site/artist.js', type: 'js', requires: ['swf']});
+        Do.add('slider', {path: 'https://img3.doubanio.com/f/shire/d8e29263385ae7460f145f82f0dba90fd12b70a9/js/site/slider.js', type: 'js'});
+        Do.add('effects', {path: 'https://img3.doubanio.com/f/shire/6733985128b21b1d52719fff9003cc60870a891b/js/lib/jquery-ui-effects-core.min.js', type: 'js'});
+        Do.add('room-setting', {path: 'https://img3.doubanio.com/f/shire/0de5154d46a152487a73c863da314139425aaf99/js/site/room-setting.js', type: 'js'});
+        Do.global('common', 'common-eventhandler');
+        var STATIC_FILE_VER = '53025';
+    </script>
+    <link rel="shortcut icon" href="https://img3.doubanio.com/favicon.ico" type="image/x-icon">
+    <link href="./构建基于R的交易系统(1)quantmod_files/core.css" rel="stylesheet" type="text/css">
+    <link href="./构建基于R的交易系统(1)quantmod_files/common.css" rel="stylesheet" type="text/css">
+    <link href="./构建基于R的交易系统(1)quantmod_files/head_poster.css" rel="stylesheet" type="text/css">
+    
+
+<script type="text/javascript">
+var roomHoverColor = '';
+</script>
+
+<!-- 阿比鹿房间透明样式 -->
+
+  
+  <link href="./构建基于R的交易系统(1)quantmod_files/core(1).css" rel="stylesheet" type="text/css">
+
+<style id="custom-theme">
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+    
+    <link type="text/css" href="./构建基于R的交易系统(1)quantmod_files/tooltip.css" rel="stylesheet">
+    
+
+
+
+
+
+    <style type="text/css">
+      
+#content h1 { margin:0 0 10px 0;line-height:1.2; }
+.note-item { margin-bottom:30px; }
+.note-hd h3 { font-size:14px;color:#060; }
+.ll { float:left;padding:0 16px 16px 0; }
+.cc { clear:both;display:block;text-align:center;  }
+.cc table {margin:0 auto;}
+.rr {float:right;padding:0 0 16px 16px;}
+.ll table, .cc table, .rr table { width:1px; }
+.note-ft { clear:both;padding-top:4px; }
+.note-ft .rec { margin-top:-2px; }
+.note-content div { font-size:14px; }
+.ui-tooltip { width: 270px }
+
+    </style>
+    <script>
+      
+
+    </script>
+    <link rel="stylesheet" href="./构建基于R的交易系统(1)quantmod_files/7ed9a4dccf8ac68b.css">
+<style type="text/css" id="css-share-button">      .bn-sharing {padding-right:10px;background-image: url(//img3.doubanio.com/pics/a1.png) !important; background-repeat: no-repeat !important; background-position: 100% -19px !important;*display:inline-block;}      a.bn-sharing:hover {text-decoration:underline;}      .bn-sharing-on {background-position:100% 4px !important;position:relative !important;z-index:1 !important;}      #db-div-sharing {position:absolute;width:100px;*margin-top:-2px;}      #db-div-sharing .bd {border:1px solid #aaa;background:#fff;padding:10px 0 0 10px;}      #db-div-sharing .bd li {line-height:17px;margin-bottom:10px;}      #db-div-sharing .hd {position:absolute;height:24px;*line-height:21px;overflow:hidden;right:0;top:-24px;padding:0 5px;border:1px solid #aaa;border-bottom:none;background:#fff;}      .rec-sin,      .rec-qzone,      .rec-tx,      .rec-wx,      .rec-qqim {padding-left:20px;background:url(https://img3.doubanio.com/f/shire/3c8da10d6081bd1b2d13d3733b2ac201535c5d0f/pics/ic_shares2.png) no-repeat 0 0;}      .rec-qzone {background-position:0 -32px;}      .rec-qqim {background-position:0 -64px;}      .rec-tx {background-position:0 -96px;}      .rec-wx {background-position:0 -128px;}   </style></head>
+<body id="182577" data-site-url-for-json="https://site.douban.com/j/182577/" data-site-url="https://site.douban.com/182577/">
+    
+
+    <div class="wrapper">
+        <div id="header">
+            <div class="top-nav">
+                <a href="https://www.douban.com/" class="logo">豆瓣</a>
+                
+
+
+
+
+
+
+
+<div class="top-nav-info">
+    
+    <a href="https://www.douban.com/accounts/login" rel="nofollow">登录</a>
+    <a href="https://www.douban.com/accounts/register">注册</a>
+</div>
+
+
+            </div>
+            
+
+            <div class="sp-nav">
+                <div class="sp-logo">
+                    <a href="https://site.douban.com/182577/" class="logo"><img src="./构建基于R的交易系统(1)quantmod_files/blank.gif" style="background:url(https://img3.doubanio.com/view/site/small/public/d0b167f395b2645.jpg) no-repeat 0 0;" width="48" height="48" alt="数据铺子">数据铺子</a>
+                </div>
+                
+
+
+
+<div class="nav-items">
+
+    <ul>
+        <li>
+            <a href="https://site.douban.com/182577/room/2171172/" hidefocus="true">
+                <span>公共空间</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://site.douban.com/182577/room/2177971/" hidefocus="true">
+                <span>统计/大数据</span>
+            </a>
+        </li>
+        <li id="current-room" class="on" data-url-for-json="https://site.douban.com/j/182577//room/2177987/">
+            <a href="https://site.douban.com/182577/room/2177987/" hidefocus="true">
+                <span>金融计算/量化</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://site.douban.com/182577/room/2177990/" hidefocus="true">
+                <span>可视化</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://site.douban.com/182577/room/2456629/" hidefocus="true">
+                <span>机器学习/数据挖掘</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://site.douban.com/182577/room/2178006/" hidefocus="true">
+                <span>图书室/杂物间</span>
+            </a>
+        </li>
+        <li id="room-more" class="opt">
+            <a id="more-icon" href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/#">&gt;&gt;</a>
+            <ul>
+                <li><a href="https://site.douban.com/182577/room/2673773/">
+                network
+                </a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+
+            </div>
+            
+
+
+        </div>
+        <div id="content">
+            <div class="main">
+                
+<div class="content-nav">
+    <a href="https://site.douban.com/182577/widget/notes/10568316/">&gt; 量化交易</a>
+</div>
+
+                
+    <noscript>
+        &lt;div class="message"&gt;
+            您的浏览器不支持javascript，不能使用此页面的全部功能。
+            请换用其他浏览器或者开启对javascript的支持。
+        &lt;/div&gt;
+    </noscript>
+
+                
+
+                
+                
+                
+<div class="mod">
+  <div class="bd">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="note-299186532" class="note-item">
+    
+
+<div class="note-hd">
+
+<h1>构建基于R的交易系统(1)quantmod</h1>
+</div>
+<span class="datetime">2013-08-31 15:42:31</span>
+
+    
+
+
+
+<div class="summary" id="note_299186532_short" style="&quot;display:none;&quot;">
+</div>
+
+<div id="note_299186532_full" class="note-content">
+  <div id="link-report">构建基于R的交易系统<br><br>在R当中可用于金融数据实证研究的R包数量很多，目前在CRAN中的这些R包大多数侧重比较学术化的金融数据的计量研究（参考<a rel="nofollow" href="https://www.douban.com/link2/?url=http%3A%2F%2Fcran.r-project.org%2Fweb%2Fviews%2FFinance.html&amp;link2key=b2a59e5d20" target="_blank">http://cran.r-project.org/web/views/Finance.html</a>）， 比如著名的Rmetrics系列。可用于交易实践的工具依然有限，相关的资料也很分散。<br><br>这个系列文档，是将这些分散的资料进行整合的一个尝试。我将采用多个R包探讨构建可用于交易实证研究的完整交易系统。采用的这一系列R包包括： <br>-quantmod（数据和图形） <br>-TTR（技术分析） <br>-blooter（账户管理） <br>-FinancialInstrument（金融产品） <br>-quantstrast（策略模型） <br>-PerformanceAnalytics（表现分析）<br><br>这些R包依然在发展中（有些还被托管在R-forge里，见<a rel="nofollow" href="https://www.douban.com/link2/?url=http%3A%2F%2Fr-forge.r-project.org%2FR%2F%3Fgroup_id%3D316&amp;link2key=b2a59e5d20" target="_blank">http://r-forge.r-project.org/R/?group_id=316</a>）， 但目前可用的部分已足以迅速地搭建起一个比较完善的交易研究平台。<br><br>1.构建交易系统的几个层次<br><br>-数据基础：R语言中的时间序列对象是一种复合的数据对象，包括一个记录时间序列数据的数据矩阵和一个相关联的表示时间的时间戳向量。这个层次主要涉及的R包有zoo和xts等。关于时间序列对象的基本操作相关资料很多，在此不作讨论。<br><br>-数据处理、图形和技术分析：quantmod包和TTR包。（目前）对单个证券建立基于技术分析的策略。就如同我们所常见的交易软件。<br><br>-交易策略和交易账户的管理：blooter包、quantstrast包和FinancialInstrument包。可以对投资组合进行策略建模。<br><br>-策略的表现和风险分析：PerformanceAnalytics包<br><br>各包的细节在文中不作过多讨论，会以附录形式穿插在文档中。<br><br>2.数据处理和图形：quantmod<br><br>quantmod包：Quantitative Financial Modelling Framework。 <a rel="nofollow" href="https://www.douban.com/link2/?url=http%3A%2F%2Fwww.quantmod.com%2F&amp;link2key=b2a59e5d20" target="_blank">http://www.quantmod.com/</a> 其目的在于为量化交易者提供一个进行建模的平台，目前的主要功能是获取交易数据进行处理并绘制交易图形。最主要的两个函数就是getSymbols和chartSeries。<br><br>（1）getSymbols<br><br>getSymbols用来获取数据。可以从R文件、数据库或者网络获取交易数据。<br><br>-Yahoo Finance / Google Finance,FRED,Oanda -csv, RData -MySQL, SQLite<br><br>关于getSymbols以前写过，在这里：<a rel="nofollow" href="https://www.douban.com/link2/?url=http%3A%2F%2Fsite.douban.com%2F182577%2Fwidget%2Fnotes%2F10568316%2Fnote%2F264808127%2F" target="_blank">http://site.douban.com/182577/widget/notes/10568316/note/264808127/</a><br><br>除了getSymbol及其变形，在quantmod里还有一系列的get函数， 如getSplits可以得到拆股的数据，getMetals可以得到金属期货的交易数据等<br><br>在使用getSymbols的时候要注意从网络获取的数据（如yahoo）可能会有错误的情况，使用时要慎重。另外，关于yahoo数据的价格复权调整，可参考<a rel="nofollow" href="https://www.douban.com/link2/?url=http%3A%2F%2Fhelp.yahoo.com%2Fkb%2Findex%3Flocale%3Den_US%26y%3DPROD_ACCT%26page%3Dcontent%26id%3DSLN2311" target="_blank">http://help.yahoo.com/kb/index?locale=en_US&amp;y=PROD_ACCT&amp;page=content&amp;id=SLN2311</a><br><br>关于复权的调整也可以使用adjustOHLC来完成（OHLC指的是开盘高点低点收盘），以当前价格向前复权：<br><br>library(quantmod)<br><br>getSymbols("IBM", from = "2000-01-01")<br><br>## [1] "IBM"<br>head(IBM)<br>##            IBM.Open IBM.High IBM.Low IBM.Close IBM.Volume IBM.Adjusted<br>## 2000-01-03    112.4    116.0   111.9     116.0   10347700        97.65<br>## 2000-01-04    114.0    114.5   110.9     112.1    8227800        94.33<br>## 2000-01-05    112.9    119.8   112.1     116.0   12733200        97.65<br>## 2000-01-06    118.0    118.9   113.5     114.0    7971900        95.96<br>## 2000-01-07    117.2    117.9   110.6     113.5   11856700        95.54<br>## 2000-01-10    117.2    119.4   115.4     118.0    8540500        99.33<br>chartSeries(IBM, theme = "white")<br><div class="cc"><table><tbody><tr><td><img src="./构建基于R的交易系统(1)quantmod_files/p9556186.jpg" alt=""></td></tr><tr><td align="center" class="wr pl"></td></tr></tbody></table></div><br>spl &lt;- getSplits("IBM")  #拆股<br>head(spl)<br>##            IBM.spl<br>## 1973-05-29    0.80<br>## 1979-06-01    0.25<br>## 1997-05-28    0.50<br>## 1999-05-27    0.50<br>div &lt;- getDividends("IBM")  #分红<br>head(div)<br>##             [,1]<br>## 1970-05-01 0.060<br>## 1970-07-31 0.060<br>## 1970-10-30 0.060<br>## 1971-02-05 0.065<br>## 1971-05-07 0.065<br>## 1971-08-06 0.065<br>adj &lt;- adjustOHLC(IBM)<br>head(adj)<br>##            IBM.Open IBM.High IBM.Low IBM.Close IBM.Volume IBM.Adjusted<br>## 2000-01-03    94.65    97.65   94.17     97.65   10347700        97.65<br>## 2000-01-04    95.96    96.39   93.33     94.33    8227800        94.33<br>## 2000-01-05    95.07   100.80   94.38     97.65   12733200        97.65<br>## 2000-01-06    99.33   100.12   95.54     95.96    7971900        95.96<br>## 2000-01-07    98.70    99.28   93.12     95.54   11856700        95.54<br>## 2000-01-10    98.70   100.49   97.12     99.33    8540500        99.33<br>chartSeries(adj, theme = "white")<br><br><div class="cc"><table><tbody><tr><td><img src="./构建基于R的交易系统(1)quantmod_files/p9556195.jpg" alt=""></td></tr><tr><td align="center" class="wr pl"></td></tr></tbody></table></div><br><br><br>（2）chartSeries<br><br>不管我们使用何种的策略，依然习惯于使用图形来进行分析。 quantmod包里基本的作图函数是chartSeries。<br>这个函数的主要参数包括：<br>&nbsp;x 数据对象<br>&nbsp;type 图的类型 <br>theme chart.theme对象，图形的表现主题 <br>subset 对数据取子集 TA 技术指标的参数<br><br>chartSeries(IBM, subset = "last 3 months", theme = "white")  #基本作图<br><div class="cc"><table><tbody><tr><td><img src="./构建基于R的交易系统(1)quantmod_files/p9556209.jpg" alt=""></td></tr><tr><td align="center" class="wr pl"></td></tr></tbody></table></div><br><br># 可以对主题进行一些修改<br>Theme.white &lt;- chartTheme("white")<br>names(Theme.white)  #一个主题里包括的内容<br>##  [1] "fg.col"       "bg.col"       "grid.col"     "border"      <br>##  [5] "minor.tick"   "major.tick"   "up.col"       "dn.col"      <br>##  [9] "dn.up.col"    "up.up.col"    "dn.dn.col"    "up.dn.col"   <br>## [13] "up.border"    "dn.border"    "dn.up.border" "up.up.border"<br>## [17] "dn.dn.border" "up.dn.border" "main.col"     "sub.col"     <br>## [21] "area"         "fill"         "Expiry"       "theme.name"<br><br>Theme.white$bg.col &lt;- "white"<br>Theme.white$dn.col &lt;- "green"  #下跌为绿<br>Theme.white$up.col &lt;- "red"  #上涨为红<br>Theme.white$border &lt;- "lightgray"<br>IBM &lt;- OHLC(IBM)<br>chartSeries(IBM, subset = "last 3 months", theme = Theme.white, TA = "addSMA(n=5,col="blue")")<br># 去掉成交量，并加上均线<br><div class="cc"><table><tbody><tr><td><img src="./构建基于R的交易系统(1)quantmod_files/p9556214.jpg" alt=""></td></tr><tr><td align="center" class="wr pl"></td></tr></tbody></table></div><br><br><br>图的类型有barChart（条形图）candleChart（蜡烛图） lineChart（线图）<br><br>要强调的是，虽然我们目前把quantmod当成构建交易系统的一个数据和图形的基础架构，quantmod的作者依然在功能的扩展上进行着开发，在quantmod包里还有一些实验性的函数，可以提供建立模型的功能以及更好的图形表现能力。希望这些实验性的工具能够尽早成熟。
+  </div>
+</div>
+
+  
+
+
+    <br>
+    
+
+
+
+<div id="note_299186532_footer" style="" class="note-ft">
+    
+
+
+
+    <div class="sns-bar">
+        
+
+
+
+        <div class="sns-bar-rec">
+            
+            <script>
+            DoubanShareMenuList = [ 'sina', 'qzone', 'tx', 'renren', 'qqim' ];
+            </script>
+            
+    
+    <span class="rec" id="Note-299186532">
+    <a href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/#" data-sina="" data-qq="" data-url="https://site.douban.com/182577/widget/notes/10568316/note/299186532/" data-desc="" data-title="【构建基于R的交易系统(1)quantmod】构建基于R的交易系统 在R当中可用于金融数据实证研究的R包数量很多，目前在CRAN中的这些R包大多数侧重比较学术化的金融数据的计量研究（参考http://cran.r-project.org/web/views/Finance.html）， 比如著名..." data-pic="https://img3.doubanio.com/view/note/large/public/p9556186.jpg" class="bn-sharing ">分享到</a> &nbsp;&nbsp;
+    </span>
+
+    
+
+                
+
+
+
+
+
+
+
+
+    <div class="rec-sec">
+
+    <span class="rec">
+
+<a data-user_id="0" href="https://www.douban.com/accounts/register?reason=collect" share-id="299186532" data-mode="plain" data-name="构建基于R的交易系统(1)quantmod" data-type="com.douban.site" data-desc="构建基于R的交易系统 在R当中可用于金融数据实证研究的R包数量很多，目前在CRAN中的这些R包大多数侧重比较学术化的金融数据的计量研究（参考http://cran.r-project.org/web/views/Finance.ht..." data-href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/" data-image="" data-properties="{&quot;href&quot;:&quot;https:\/\/site.douban.com\/182577\/&quot;,&quot;name&quot;:&quot;数据铺子&quot;,&quot;uid&quot;:&quot;182577&quot;}" data-redir="https://site.douban.com/static/dshare_proxy.html" data-text="" data-apikey="" data-curl="" data-count="10" data-object_kind="1015" data-object_id="299186532" data-target_type="rec" data-target_action="0" data-action_props="{&quot;note_url&quot;:&quot;https:\/\/site.douban.com\/182577\/widget\/notes\/10568316\/note\/299186532\/&quot;,&quot;note_title&quot;:&quot;构建基于R的交易系统(1)quantmod&quot;,&quot;author_name&quot;:&quot;数据铺子&quot;}" data-btn_text="推荐" data-heading="推荐到豆瓣" data-sanity_key="_50d0f" class="j a_show_login lnk-sharing lnk-douban-sharing">推荐</a>
+</span>
+        <span class="rec-num">8人</span>
+</div>
+
+        </div>
+        <div class="sns-bar-fav">
+            
+
+
+
+
+
+
+<span class="fav-num" data-tid="299186532" data-tkind="1015">
+      <a href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/#">34人</a>
+  喜欢
+</span>
+
+    <a class="fav-add btn-fav j a_show_login" title="标为喜欢？" href="https://www.douban.com/accounts/register?reason=like" data-tid="299186532" data-tkind="1015">喜欢</a>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="comments" class="">
+
+
+
+
+
+    
+
+<div class="comment-item" id="35230487" data-cid="35230487" data-target_id="299186532" data-target_kind="1015">
+    
+    <div class="pic">
+        <a href="https://www.douban.com/people/45119625/"><img width="48" height="48" class="" src="./构建基于R的交易系统(1)quantmod_files/user_normal.jpg" alt="[已注销]"></a>
+    </div>
+    <div class="content report-comment">
+        <div class="author">
+            <span class="">2013-08-31 19:34:57</span>
+            <a href="https://www.douban.com/people/45119625/" class="  ">[已注销]</a> 
+        </div>
+
+
+        
+        <p class="">挺好的，不过说实在很多时候不敢用这种包。一方面有错误，比如TTR包的唐安奇通道貌似写的不对，永远不会突破，用着心里比较慌。另一方面设计策略的时候感觉不够灵活，不如自己写C＋＋或者python，毕竟技术指标在回测时也比较好计算，而且可以嵌一些别的过滤器或者滤波的方式。<br>但是quantmod画图看具体结果确实挺方便的。</p>
+
+        <div class="op-lnks">
+        
+        </div>
+
+        <div class="group_banned">
+            <span class="gact hidden p_u45119625 p_admin p_intern fright">&gt;
+                <a rel="nofollow" href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/remove_comment?cid=35230487" class="j a_confirm_link" title="删除[已注销]的发言?">删除</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+    
+
+<div class="comment-item" id="35231535" data-cid="35231535" data-target_id="299186532" data-target_kind="1015">
+    
+    <div class="pic">
+        <a href="https://www.douban.com/people/36849435/"><img width="48" height="48" class="" src="./构建基于R的交易系统(1)quantmod_files/u36849435-12.jpg" alt="船长阿道克"></a>
+    </div>
+    <div class="content report-comment">
+        <div class="author">
+            <span class="">2013-08-31 21:38:34</span>
+            <a href="https://www.douban.com/people/36849435/" class="  ">船长阿道克</a> 
+        </div>
+
+
+        
+        <p class="">这些包确实有各自的问题，而且有些问题可能也不好解决，都开发了好几年了，依然带有一些试验的性质。所以在这里主要写框架，尽量少写策略的东西。用它们的好处就是一些基本的东西不需要再自己写了。
+<br>我自己用的策略很简单，就是趋势跟踪加转折点的判断。</p>
+
+        <div class="op-lnks">
+        
+        </div>
+
+        <div class="group_banned">
+            <span class="gact hidden p_u36849435 p_admin p_intern fright">&gt;
+                <a rel="nofollow" href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/remove_comment?cid=35231535" class="j a_confirm_link" title="删除船长阿道克的发言?">删除</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+    
+
+<div class="comment-item" id="35233133" data-cid="35233133" data-target_id="299186532" data-target_kind="1015">
+    
+    <div class="pic">
+        <a href="https://www.douban.com/people/45119625/"><img width="48" height="48" class="" src="./构建基于R的交易系统(1)quantmod_files/user_normal.jpg" alt="[已注销]"></a>
+    </div>
+    <div class="content report-comment">
+        <div class="author">
+            <span class="">2013-09-01 00:15:14</span>
+            <a href="https://www.douban.com/people/45119625/" class="  ">[已注销]</a> 
+        </div>
+
+
+        
+        <p class="">股指日内还是啥的？看前面的文章还以为老师的兴趣在pair trading</p>
+
+        <div class="op-lnks">
+        
+        </div>
+
+        <div class="group_banned">
+            <span class="gact hidden p_u45119625 p_admin p_intern fright">&gt;
+                <a rel="nofollow" href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/remove_comment?cid=35233133" class="j a_confirm_link" title="删除[已注销]的发言?">删除</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+    
+
+<div class="comment-item" id="35234140" data-cid="35234140" data-target_id="299186532" data-target_kind="1015">
+    
+    <div class="pic">
+        <a href="https://www.douban.com/people/36849435/"><img width="48" height="48" class="" src="./构建基于R的交易系统(1)quantmod_files/u36849435-12.jpg" alt="船长阿道克"></a>
+    </div>
+    <div class="content report-comment">
+        <div class="author">
+            <span class="">2013-09-01 08:52:56</span>
+            <a href="https://www.douban.com/people/36849435/" class="  ">船长阿道克</a> 
+        </div>
+
+
+        
+        <p class="">日内没条件做，没时间呵呵。多学点，多看点，做个技术储备吧。</p>
+
+        <div class="op-lnks">
+        
+        </div>
+
+        <div class="group_banned">
+            <span class="gact hidden p_u36849435 p_admin p_intern fright">&gt;
+                <a rel="nofollow" href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/remove_comment?cid=35234140" class="j a_confirm_link" title="删除船长阿道克的发言?">删除</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+    
+
+<div class="comment-item" id="35684151" data-cid="35684151" data-target_id="299186532" data-target_kind="1015">
+    
+    <div class="pic">
+        <a href="https://www.douban.com/people/oceanszy/"><img width="48" height="48" class="" src="./构建基于R的交易系统(1)quantmod_files/u4131336-4.jpg" alt="oceans"></a>
+    </div>
+    <div class="content report-comment">
+        <div class="author">
+            <span class="">2013-10-13 21:41:28</span>
+            <a href="https://www.douban.com/people/oceanszy/" class="  ">oceans</a> 
+        </div>
+
+
+        
+        <p class="">赞！ matlab就是没有这样的包，我才开始学R。 用C++、python还得自己写macd、kdj、rsi之类的，比较麻烦。</p>
+
+        <div class="op-lnks">
+        
+        </div>
+
+        <div class="group_banned">
+            <span class="gact hidden p_u4131336 p_admin p_intern fright">&gt;
+                <a rel="nofollow" href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/remove_comment?cid=35684151" class="j a_confirm_link" title="删除oceans的发言?">删除</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+    
+
+<div class="comment-item" id="38095934" data-cid="38095934" data-target_id="299186532" data-target_kind="1015">
+    
+    <div class="pic">
+        <a href="https://www.douban.com/people/gavinking/"><img width="48" height="48" class="" src="./构建基于R的交易系统(1)quantmod_files/u7763019-6.jpg" alt="金小录Gavin"></a>
+    </div>
+    <div class="content report-comment">
+        <div class="author">
+            <span class="">2014-05-29 10:23:03</span>
+            <a href="https://www.douban.com/people/gavinking/" class="  ">金小录Gavin</a>  (在豆瓣学习、成长……)
+        </div>
+
+
+        
+        <p class="">手动导入数据后转化为xts类型后只能画出线图，这种情况您碰到过么？</p>
+
+        <div class="op-lnks">
+        
+        </div>
+
+        <div class="group_banned">
+            <span class="gact hidden p_u7763019 p_admin p_intern fright">&gt;
+                <a rel="nofollow" href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/remove_comment?cid=38095934" class="j a_confirm_link" title="删除金小录Gavin的发言?">删除</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+    
+
+<div class="comment-item" id="38104571" data-cid="38104571" data-target_id="299186532" data-target_kind="1015">
+    
+    <div class="pic">
+        <a href="https://www.douban.com/people/36849435/"><img width="48" height="48" class="" src="./构建基于R的交易系统(1)quantmod_files/u36849435-12.jpg" alt="船长阿道克"></a>
+    </div>
+    <div class="content report-comment">
+        <div class="author">
+            <span class="">2014-05-29 20:21:59</span>
+            <a href="https://www.douban.com/people/36849435/" class="  ">船长阿道克</a> 
+        </div>
+
+            
+                
+                <div class="reply-quote">
+                <span class="short">手动导入数据后转化为xts类型后只能画出线图，这种情况您碰到过么？</span>
+                <span class="all">手动导入数据后转化为xts类型后只能画出线图，这种情况您碰到过么？</span>
+                <a href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/#" class="toggle-reply">
+                </a><span class="pubdate"><a href="https://www.douban.com/people/gavinking/">金小录Gavin</a></span></div>
+
+        
+        <p class="">画蜡烛图需要OHLC型的数据，就是包含开盘最高最低和收盘的数据</p>
+
+        <div class="op-lnks">
+        
+        </div>
+
+        <div class="group_banned">
+            <span class="gact hidden p_u36849435 p_admin p_intern fright">&gt;
+                <a rel="nofollow" href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/remove_comment?cid=38104571" class="j a_confirm_link" title="删除船长阿道克的发言?">删除</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="last"></div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    <br><span class="pl2" align="right"><a class="j a_show_login" href="https://www.douban.com/accounts/register?reason=comment">&gt; 我来回应</a></span>
+
+
+ 
+
+ 
+
+    
+    
+    
+
+
+
+
+
+
+
+
+</div>
+
+
+<script>
+Do(function(){
+  $('#comments').find('.comment-item').hover(function(){$(this).addClass('over');}, function(){$(this).removeClass('over');});
+  $('.reply-quote .toggle-reply').click(function(e) {
+    e.preventDefault();
+    var el = $(this);
+    el.prevAll('span').toggle();
+    el.find('span').toggle();
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+            </div>
+            <div class="aside">
+                
+
+<div class="mod">
+    
+    <h2>
+        数据铺子的日记
+            
+            <span class="pl">&nbsp;(
+                
+                    <a href="https://site.douban.com/182577/widget/notes/10568316/" target="_self">全部</a>
+                ) </span>
+    </h2>
+
+    
+    <ul class="list note-list">
+          <li><a title="利用ggplot2画蜡烛图" href="https://site.douban.com/182577/widget/notes/10568316/note/474672244/">利用ggplot2画蜡烛图</a>
+          </li><li><a title="上证50的“社交网络”" href="https://site.douban.com/182577/widget/notes/10568316/note/452257762/">上证50的“社交网络”</a>
+          </li><li><a title="日内走势图形" href="https://site.douban.com/182577/widget/notes/10568316/note/351764308/">日内走势图形</a>
+          </li><li><a title="构建基于R的交易系统(5)quantstrat包（中）" href="https://site.douban.com/182577/widget/notes/10568316/note/314054142/">构建基于R的交易系统(5)quantstrat包（中）</a>
+          </li><li><a title="构建基于R的交易系统(5)quantstrat包（上）" href="https://site.douban.com/182577/widget/notes/10568316/note/313993652/">构建基于R的交易系统(5)quantstrat包（上）</a>
+    </li></ul>
+</div>
+
+
+
+
+
+<div class="db-ad">
+        <div id="dale_site_normal_right_bottom"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="mod">
+    
+    <h2>
+        推荐这篇日记的豆列
+            
+            <span class="pl">&nbsp;(
+                
+                    <a href="https://site.douban.com/182577/widget/notes/10568316/note/299186532/doulists" target="_self">全部</a>
+                ) </span>
+    </h2>
+
+    
+    <ul class="bs">
+        <li><a href="https://www.douban.com/doulist/2795908/">投机学习</a>
+            
+                <span class="pl">(口水猫)</span>
+        </li>
+        <li><a href="https://www.douban.com/doulist/3354534/">R-Fin</a>
+            
+                <span class="pl">(Jiang)</span>
+        </li>
+        <li><a href="https://www.douban.com/doulist/3937238/">IT</a>
+            
+                <span class="pl">(小巫仙小讨厌)</span>
+        </li>
+        <li><a href="https://www.douban.com/doulist/39688640/">量化交易</a>
+            
+                <span class="pl">(jxyue)</span>
+        </li>
+        <li><a href="https://www.douban.com/doulist/41462862/">摇滚</a>
+            
+                <span class="pl">(Sunshine Star)</span>
+        </li>
+    </ul>
+
+</div>
+
+            </div>
+            <div class="extra">
+                
+            </div>
+        </div>
+        
+<div id="footer">
+    
+
+<div class="db-inc">
+<span class="about">
+    <a href="https://www.douban.com/about">关于豆瓣</a>
+    · <a href="https://www.douban.com/jobs">在豆瓣工作</a>
+    · <a href="https://www.douban.com/about?topic=contactus">联系我们</a>
+    · <a href="https://www.douban.com/about?policy=disclaimer">免责声明</a>
+    · <a href="https://www.douban.com/help/">帮助中心</a>
+    · <a href="https://www.douban.com/doubanapp/">移动应用</a>
+    · <a href="https://www.douban.com/partner/">豆瓣广告</a>
+
+</span>
+<span class="copyright">
+    © 2005－2016 douban.com, all rights reserved
+</span>
+
+
+</div>
+
+</div>
+
+    </div>
+    <div class="bg">&nbsp;<div class="mask">&nbsp;</div></div>
+
+    <script type="text/javascript" src="./构建基于R的交易系统(1)quantmod_files/c9b63aa06458a5.js.下载"></script>
+    
+<script type="text/javascript">
+    Do.add('ui_tooltip_css', {path: 'https://img3.doubanio.com/f/shire/ce3ccd609585055eee51d0226a7c6bbe5563454a/css/lib/jquery.ui.tooltip.css', type: 'css'});
+    Do.add('jquery_ui', {path: 'https://img3.doubanio.com/f/shire/e254005edae24d9a1808ede9c3d7fcc5b6d94e1b/js/lib/jquery.ui.min.js', type: 'js'});
+    Do.add('ui_tooltip', {path: 'https://img3.doubanio.com/f/shire/b25c20b18198fe069cd80d64f4ca614e20b419cb/js/lib/jquery.ui.tooltip.js', type: 'js', requires: ['jquery_ui', 'ui_tooltip_css']});
+    Do('ui_tooltip', function(){
+        $(document).ready(function(){
+            $("a[id='note_tooltip']").each(function(){
+                $(this).tooltip();
+            });
+        })
+    });
+</script>
+
+    
+    <!-- biz script begin -->
+
+      
+
+
+
+
+
+
+
+
+
+<!-- Google Tag Manager -->
+<noscript>&lt;iframe src="//www.googletagmanager.com/ns.html?id=GTM-5WP579" height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;</noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5WP579');</script>
+<!-- End Google Tag Manager -->
+
+
+<script type="text/javascript">
+var _paq = _paq || [];
+_paq.push(['trackPageView']);
+_paq.push(['enableLinkTracking']);
+(function() {
+    var p=(('https:' == document.location.protocol) ? 'https' : 'http'), u=p+'://fundin.douban.com/';
+    _paq.push(['setTrackerUrl', u+'piwik']);
+    _paq.push(['setSiteId', '100001']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript';
+    g.defer=true;
+    g.async=true;
+    g.src=p+'://img3.doubanio.com/dae/fundin/piwik.js';
+    s.parentNode.insertBefore(g,s);
+})();
+</script>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-7019765-1']);
+_gaq.push(['_setCampNameKey', 'dcn']);
+_gaq.push(['_setCampSourceKey', 'dcs']);
+_gaq.push(['_setCampMediumKey', 'dcm']);
+_gaq.push(['_setCampTermKey', 'dct']);
+_gaq.push(['_setCampContentKey', 'dcc']);
+_gaq.push(['_addOrganic', 'baidu', 'word']);
+_gaq.push(['_addOrganic', 'soso', 'w']);
+_gaq.push(['_addOrganic', '3721', 'name']);
+_gaq.push(['_addOrganic', 'youdao', 'q']);
+_gaq.push(['_addOrganic', 'so.360.cn', 'q']);
+_gaq.push(['_addOrganic', 'vnet', 'kw']);
+_gaq.push(['_addOrganic', 'sogou', 'query']);
+_gaq.push(['_addIgnoredOrganic', '豆瓣']);
+_gaq.push(['_addIgnoredOrganic', 'douban']);
+_gaq.push(['_addIgnoredOrganic', '豆瓣网']);
+_gaq.push(['_addIgnoredOrganic', 'www.douban.com']);
+_gaq.push(['_setDomainName', '.douban.com']);
+
+_gaq.push(['_setCustomVar', 1, 'site_type', 'normal', 3]); 
+
+
+    _gaq.push(['_setCustomVar', 1, 'responsive_view_mode', 'desktop', 3]);
+
+_gaq.push(['_trackPageview']);
+_gaq.push(['_trackPageLoadTime']);
+
+window._ga_init = function() {
+    var ga = document.createElement('script');
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    ga.setAttribute('async', 'true');
+    document.documentElement.firstChild.appendChild(ga);
+};
+if (window.addEventListener) {
+    window.addEventListener('load', _ga_init, false);
+} else {
+    window.attachEvent('onload', _ga_init);
+}
+</script>
+
+
+
+
+
+
+    
+
+<script type="text/javascript">
+  Do(function(){
+    $(function(){
+      $.get('/stat.html?ref=https%3A%2F%2Fsite.douban.com%2F182577%2F&site_type=n&bid=Bxl3npr%2FJGY&uid=na');
+    });
+  });
+</script>
+
+    
+    <!-- biz script end -->
+
+    
+
+
+<!-- douban ad begin -->
+
+
+
+
+
+
+    
+<script type="text/javascript">
+    (function (global) {
+        var newNode = global.document.createElement('script'),
+            existingNode = global.document.getElementsByTagName('script')[0],
+            adSource = '//erebor.douban.com/',
+            userId = '',
+            browserId = 'Bxl3npr/JGY',
+            criteria = '5:182577|3:/widget/notes/10568316/note/299186532/',
+            preview = '',
+            debug = false,
+            adSlots = ['dale_site_normal_right_bottom'];
+
+        global.DoubanAdRequest = {src: adSource, uid: userId, bid: browserId, crtr: criteria, prv: preview, debug: debug};
+        global.DoubanAdSlots = (global.DoubanAdSlots || []).concat(adSlots);
+
+        newNode.setAttribute('type', 'text/javascript');
+        newNode.setAttribute('src', 'https://img3.doubanio.com/f/shire/0e535fd6bda0edba694334298335282ff5e9d954/js/ad.js');
+        newNode.setAttribute('async', true);
+        existingNode.parentNode.insertBefore(newNode, existingNode);
+    })(this);
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- douban ad end -->
+
+
+    <script>_SPLITTEST=''</script>
+    <!-- sindar30b-docker-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>

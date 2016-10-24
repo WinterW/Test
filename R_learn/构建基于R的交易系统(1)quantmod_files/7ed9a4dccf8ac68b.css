@@ -1,0 +1,49 @@
+
+.dui-dialog.fav-tag-tip .dui-dialog-content,
+.dui-dialog.fav-tag-tip .tag-editor-ft {
+    border: none;
+}
+.dui-dialog.fav-tag-tip .hd,
+.dui-dialog.fav-tag-tip .tag-editor-ft {
+    background: #fff;
+}
+.fav-tag-tip:after {
+    content: '\0020';
+    position: absolute;
+    right: 20px;
+    bottom: -18px;
+    height: 0;
+    width: 0;
+    border: 10px solid #666;
+    border-color: #666 #fff #fff;
+    border-bottom: 0;
+    opacity: .4;
+}
+
+    .lnk-reply { margin-right:20px; color: #bbb;}
+    .op-lnks { visibility:hidden;text-align:right; }
+    .op-lnks a:link,
+    .op-lnks a:visited { color:#bbb; }
+    .op-lnks a:hover { color:#fff;background-color:#bbb; }
+    .op-lnks a.comment-source { visibility: visible; float: left; margin-right: 20px; }
+    .over .op-lnks { visibility:visible; }
+    .reply-quote { width:30em;padding-left:7px;margin:20px 0;border-left:1px solid;  }
+    .reply-quote .all { display: none }
+
+.reply-comment { width:98%;position:relative;padding:3px 4px;margin-bottom:5px;background-color:#e8eef2; }
+.reply-comment .lnk-close { position:absolute;right:10px;top:10px;line-height:1;padding:0 2px; }
+.reply-comment .lnk-close:link,
+.reply-comment .lnk-close:visited,
+.reply-comment .lnk-close:hover,
+.reply-comment .lnk-close:active { font-size:16px; }
+.reply-comment .lnk-close:link { color:#999; }
+.reply-comment .lnk-close:hover { background-color:#999;color:#fff; }
+.reply-comment p { width:30em;padding:6px;margin:0; }
+.reply-comment .pubdate { white-space:nowrap;margin-left:10px; }
+
+  .HXXX { background: #000; color: red; font-size: 23px }
+
+    .note-list { margin-top:-5px; }
+    .note-list li { border-bottom: 1px dashed #ccc;padding: 0 0 5px 0; margin: 5px 0 0 0; font-size:12px; }
+    .bs{ margin: 0px; padding: 0px; word-wrap: break-word; }
+    .bs li{ border-bottom: 1px dashed #ddd; margin:0; padding:4px 0;overflow:hidden; }

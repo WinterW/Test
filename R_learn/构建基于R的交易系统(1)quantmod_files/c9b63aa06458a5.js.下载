@@ -1,0 +1,133 @@
+
+    /* for room nav */
+    Do(function () {
+        $('.nav-items .opt > a').click(function (e) {
+            // 不显示管理菜单
+            if (e.target.id === 'admin-icon') {
+              return;
+            }
+            var self = this;
+            $(this).next().show().blur_hide();
+            if (!$('ul', this).is(':hidden')) {
+                if (roomHoverColor) {
+                    $(this).css('background-color', roomHoverColor);
+                }
+                $(this).addClass('admin-icon-active');
+            }
+            $(document.body).click(function (e) {
+                if (e.target.id !== 'admin-icon') {
+                    $(self).removeAttr('class');
+                }
+                if (e.target.id !== 'more-icon' && roomHoverColor) {
+                    $(self).removeAttr('style');
+                }
+            });
+            e.preventDefault();
+        });
+    });
+
+Do(function() {
+
+var addSimpleTooltip = function(selector, link){
+  // only display to logged user
+  if (!get_cookie('ck')) return;
+
+  var delayTime = 85;
+  var delayTimer = false;
+
+  var hideClassName = 'doulist-tooltip-hide';
+  var $tooltip = $('<div class="doulist-add-tooltip">' + link + '<div class="arrow"></div></div>');
+  var $btn = $tooltip.find('a');
+
+  $tooltip.addClass(hideClassName);
+  $tooltip.appendTo($('body'));
+
+  var delayHideHandler = function(e){
+    delayTimer = setTimeout(function(){
+        $tooltip.addClass(hideClassName);
+    }, delayTime)
+  }
+
+  $(selector).mouseenter(function(e){
+    var $link = $(this);
+    $tooltip.css({
+      top: $link.position().top - 28,
+      left: e.pageX - 42
+    })
+    $btn.data('url', $link.attr('href'));
+
+    clearTimeout(delayTimer);
+    $tooltip.removeClass(hideClassName);
+  }).mouseleave(delayHideHandler);
+
+  $tooltip
+    .mouseenter(function(){
+    clearTimeout(delayTimer);
+    })
+    .mouseleave(delayHideHandler)
+}
+
+function initPrestoStat(presto_selector, stat_selector, options) {
+  var container = $(presto_selector);
+  var presto_words = container.html();
+  if (presto_words) {
+    var stat_num = $(stat_selector).html();
+    if (stat_num) {
+      stat_num = parseInt(stat_num);
+      var presto_stat_num = parseInt(container.data('count'));
+      stat_num = stat_num + presto_stat_num;
+      if (options) {
+        // for sns-bar 2016 summer
+        $(stat_selector).html(stat_num);
+        addSimpleTooltip(options.button, presto_words);
+      } else {
+        // for sns-bar 2015 winter
+        $(stat_selector).html(stat_num + "人");
+        addSimpleTooltip(stat_selector, presto_words);
+      }
+    }
+  }
+}
+
+
+if ($('.fav-num a').length) {
+    // button in 2015 winter style
+    initPrestoStat('.presto-like-words', '.fav-num a');
+    initPrestoStat('.presto-rec-words', '.rec-sec .rec-num');
+} else {
+    initPrestoStat('.presto-like-words', '.fav-num', {
+        button: '.sns-bar-fav'
+    });
+    initPrestoStat('.presto-rec-words', '.rec-num', {
+        button: '.sns-bar .sharing'
+    });
+}
+
+});
+
+    if (!window.DoubanShareMenuList) {
+        window.DoubanShareMenuList = [];
+    }
+    var __cache_url = __cache_url || {};
+    (function(u){
+        if(__cache_url[u]) return;
+        __cache_url[u] = true;
+        window.DoubanShareIcons = 'https://img3.doubanio.com/f/shire/3c8da10d6081bd1b2d13d3733b2ac201535c5d0f/pics/ic_shares2.png';
+        var initShareButton = function() {
+          $.ajax({url:u,dataType:'script',cache:true});
+        };
+        if (typeof Do == 'function' && 'ready' in Do) {
+          Do('https://img3.doubanio.com/f/shire/8377b9498330a2e6f056d863987cc7a37eb4d486/css/ui/dialog.css',
+            'https://img3.doubanio.com/f/shire/4b3bad5e25de78678d700dd5353570dce3e6bbcc/js/ui/dialog.js',
+            initShareButton);
+        } else if(typeof Douban == 'object' && 'loader' in Douban) {
+          Douban.loader.batch(
+            'https://img3.doubanio.com/f/shire/8377b9498330a2e6f056d863987cc7a37eb4d486/css/ui/dialog.css',
+            'https://img3.doubanio.com/f/shire/4b3bad5e25de78678d700dd5353570dce3e6bbcc/js/ui/dialog.js'
+          ).done(initShareButton);
+        }
+    })('https://img3.doubanio.com/f/shire/3c817e21c473629a7e5fd09ca7f4eadf5ef24012/js/lib/sharebutton.js');
+    
+var douban_src = '//' + 'www.douban.com';
+var fav_type = 'default';
+var fav_url = '#';

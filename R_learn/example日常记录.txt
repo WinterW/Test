@@ -1,0 +1,32 @@
+> help.start()
+> install.packages('quantmod')
+#quantmod包：Quantitative Financial Modelling Framework。 http://www.quantmod.com/ #其目的在于为量化交易者提供一个进行建模的平台，目前的主要功能是获取交易数据进行处理并绘制交易图形。最主要的两个函数就是getSymbols和chartSeries。
+> require(quantmod)
+> install.packages("Rweibo", repos="http://R-Forge.R-project.org")
+> install.packages('RCurl')
+> install.packages('rjson')
+> install.packages('XML')
+> install.packages('digest')
+> install.packages("Rweibo", repos="http://R-Forge.R-project.org")
+> install.packages("rJava")
+> install.packages("Rwordseg", repos="http://R-Forge.R-project.org")
+> install.packages("Rwordseg", repos="http://R-Forge.R-project.org")
+> library(quantmod)
+> getSymbols("IBM", from = "2000-01-01")
+[1] "IBM"
+> head(IBM)
+           IBM.Open IBM.High IBM.Low IBM.Close IBM.Volume IBM.Adjusted
+2000-01-03 112.4375 116.0000 111.875  116.0000   10347700     89.25753
+2000-01-04 114.0000 114.5000 110.875  112.0625    8227800     86.22777
+2000-01-05 112.9375 119.7500 112.125  116.0000   12733200     89.25753
+2000-01-06 118.0000 118.9375 113.500  114.0000    7971900     87.71861
+2000-01-07 117.2500 117.9375 110.625  113.5000   11856700     87.33388
+2000-01-10 117.2500 119.3750 115.375  118.0000    8540500     90.79645
+> chartSeries(IBM, theme="white")
+> spl<-getSplits("IBM")#拆股
+> head(spl)
+           IBM.spl
+1973-05-29    0.80
+1979-06-01    0.25
+1997-05-28    0.50
+1999-05-27    0.50

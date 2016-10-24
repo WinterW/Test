@@ -1,0 +1,41 @@
+
+.sp-logo a:link,
+.sp-logo a:visited,
+.sp-logo a:active,
+.sp-logo a:hover { color: #fff }
+.mod h2 { color: #383838 }
+
+
+.bg { background: #ebf2db url(/f/shire/bd825c4c5122b9aca1f7ea47a09b8ca42aa59fd9/pics/site/theme/5/bg.png) }
+
+
+.sp-nav { background-color: #5a9475 }
+
+
+.nav-items li { background: #8bbd86 }
+.nav-items li a:link,
+.nav-items li a:visited { color: #fff }
+.nav-items li.on { border-color: #8bbd86 }
+
+
+.content-nav a,
+.mod a,
+.type-nav a,
+.top-nav a:link,
+.top-nav a:visited,
+.top-nav a:hover,
+.top-nav a:active,
+#footer a { color: #52946f }
+.content-nav a:hover,
+.mod a:hover, 
+.type-nav .on a,
+.type-nav a:hover,
+.top-nav .top-nav-info a:hover,
+#footer a:hover { color: #fff; background-color: #52946f }
+
+
+#theme-bg { background-color: #ebf2db }
+#theme-banner { background-color: #5a9475 }
+#theme-tag-bg { background-color: #8bbd86 }
+#theme-tag-link { background-color: #fff }
+#theme-link { background-color: #52946f }

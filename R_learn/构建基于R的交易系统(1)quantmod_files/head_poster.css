@@ -1,0 +1,91 @@
+.admin-options {
+  margin: 0 auto;
+  width: 954px;
+}
+.admin-options a{
+  font-size: 13px;
+  color: #52946f;
+  display: inline-block;
+  border: 1px solid #8bbd86;
+  padding: 5px 18px;
+}
+.admin-options a:hover{
+  color: #fff;
+  background-color: #52946f;
+}
+
+.head-poster {
+}
+.head-poster .settings {
+  display: none;
+  padding-top: 10px;
+  width: 954px;
+  margin: 0 auto;
+  background: #393939;
+  padding: 18px;
+  color: white;
+}
+.head-poster .settings .setting-group{
+    margin-bottom: 10px;
+    margin-left: 22px;
+}
+.head-poster .settings .setting-group label{
+    width: 70px;
+    text-align: right;
+    padding-right: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.head-poster .settings .setting-group .setting-control{
+    display: inline-block;
+}
+.head-poster .settings .setting-group input{
+    margin: 0 0px;
+}
+.head-poster .links {
+  display: none;
+}
+.head-poster input[type="url"] {
+  width: 400px; 
+}
+.head-poster input[type="number"] { 
+  width: 50px;
+}
+.head-poster input[disabled="disabled"] {
+  background-color: #eee;
+}
+.head-poster .tips, .head-poster .form, .head-poster .links {
+  padding: 20px 20px 15px 20px;
+  line-height: 24px;
+}
+.head-poster .tips {
+  color: #bbb;
+}
+.tips a{
+    color: #1abc9c;
+}
+.head-poster .content {
+  min-height: 280px; 
+}
+.head-poster iframe {
+  z-index: -1;
+}
+#head-poster-mask {
+  position: absolute;
+  width: 990px;
+  z-index: 20;
+  display: none;
+}
+#head-poster-mask a:hover, #head-poster-mask a:active {
+  background-color: rgba(0, 0, 0, 0.3); 
+}
+#head-poster-links {
+  position: absolute;
+  z-index: 10;
+}
+.head-poster-link {
+  position: absolute;
+}
+#head-poster-links a:hover, #head-poster-links a:active {
+  background: transparent;
+}
