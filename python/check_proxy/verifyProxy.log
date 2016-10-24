@@ -1,0 +1,88 @@
+2015-11-20 17:59:01,886|140345986492160|proxy_check|INFO|verify_proxy_handle.py:75 
+<===================Check proxy in db================================>
+2015-11-20 17:59:01,948|140345706804992|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 17:59:01,962|140345696315136|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 17:59:02,113|140345986492160|proxy_check|INFO|thread_pool.py:47 Start thread num:500
+2015-11-20 17:59:02,202|140345947698944|proxy_check|INFO|proxy_check.py:73 Proxy 218.200.66.196:80 is available.
+2015-11-20 17:59:02,386|140345926719232|proxy_check|INFO|proxy_check.py:73 Proxy 220.248.224.242:8089 is available.
+2015-11-20 17:59:02,665|140345960339200|proxy_check|INFO|proxy_check.py:73 Proxy 61.93.246.59:8080 is available.
+2015-11-20 17:59:06,953|140345937209088|proxy_check|WARNING|proxy_check.py:38 Proxy 175.126.192.92:80 is unavailable, error[<urlopen error timed out>].
+2015-11-20 17:59:06,958|140345986492160|proxy_check|INFO|verify_proxy_handle.py:81 
+<===================Get and check proxy from proxy pool==============>
+2015-11-20 17:59:07,121|140345986492160|proxy_check|INFO|proxy_get.py:47 Get proxy success, proxy num[4].
+2015-11-20 17:59:07,157|140345947698944|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 17:59:07,177|140345706804992|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 17:59:07,194|140345696315136|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 17:59:07,326|140345986492160|proxy_check|INFO|thread_pool.py:47 Start thread num:500
+2015-11-20 17:59:12,155|140345937209088|proxy_check|WARNING|proxy_check.py:38 Proxy 171.38.24.248:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 17:59:12,160|140345926719232|proxy_check|WARNING|proxy_check.py:38 Proxy 113.200.220.43:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 17:59:12,160|140345960339200|proxy_check|WARNING|proxy_check.py:38 Proxy 171.38.24.248:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 17:59:12,166|140345986492160|proxy_check|INFO|verify_proxy_handle.py:89 
+<===================Save proxy info to db============================>
+2015-11-20 17:59:12,262|140345986492160|proxy_check|INFO|db_proxy_handler.py:83 Save 4 proxy into db[host:192.168.64.18, db:test]
+2015-11-20 17:59:12,304|140345986492160|proxy_check|INFO|db_proxy_handler.py:112 Delete 3 invalid proxy from db[host:192.168.64.18, db:test]
+2015-11-20 17:59:12,304|140345986492160|proxy_check|INFO|verify_proxy_handle.py:101 Proxy check interval:10, check thread num:500.
+2015-11-20 18:01:19,044|140633412601600|proxy_check|INFO|verify_proxy_handle.py:75 
+<===================Check proxy in db================================>
+2015-11-20 18:01:19,101|140633352832768|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:01:19,109|140633134069504|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:01:19,117|140633123579648|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:01:19,132|140633113089792|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:01:19,146|140633102599936|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:01:19,174|140633386452736|proxy_check|WARNING|proxy_check.py:38 Proxy 61.93.246.59:8080 is unavailable, error[<urlopen error [Errno 111] Connection refused>].
+2015-11-20 18:01:19,256|140633412601600|proxy_check|INFO|thread_pool.py:47 Start thread num:500
+2015-11-20 18:01:19,368|140633373812480|proxy_check|INFO|proxy_check.py:73 Proxy 218.200.66.196:80 is available.
+2015-11-20 18:01:19,767|140633363322624|proxy_check|INFO|proxy_check.py:73 Proxy 220.248.224.242:8089 is available.
+2015-11-20 18:01:19,772|140633412601600|proxy_check|INFO|verify_proxy_handle.py:81 
+<===================Get and check proxy from proxy pool==============>
+2015-11-20 18:01:19,932|140633412601600|proxy_check|INFO|proxy_get.py:47 Get proxy success, proxy num[5].
+2015-11-20 18:01:19,973|140633134069504|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:01:19,998|140633123579648|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:01:20,109|140633412601600|proxy_check|INFO|thread_pool.py:47 Start thread num:500
+2015-11-20 18:01:24,971|140633373812480|proxy_check|WARNING|proxy_check.py:38 Proxy 171.38.24.248:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 18:01:24,972|140633363322624|proxy_check|WARNING|proxy_check.py:38 Proxy 171.38.24.248:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 18:01:24,976|140633386452736|proxy_check|WARNING|proxy_check.py:38 Proxy 221.179.236.58:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 18:01:26,015|140633352832768|proxy_check|WARNING|proxy_check.py:38 Proxy 113.200.220.43:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 18:01:26,020|140633412601600|proxy_check|INFO|verify_proxy_handle.py:89 
+<===================Save proxy info to db============================>
+2015-11-20 18:01:26,125|140633412601600|proxy_check|INFO|db_proxy_handler.py:83 Save 5 proxy into db[host:192.168.64.18, db:test]
+2015-11-20 18:01:26,166|140633412601600|proxy_check|INFO|db_proxy_handler.py:112 Delete 4 invalid proxy from db[host:192.168.64.18, db:test]
+2015-11-20 18:01:26,167|140633412601600|proxy_check|INFO|verify_proxy_handle.py:101 Proxy check interval:7, check thread num:500.
+2015-11-20 18:02:03,446|139644654520064|proxy_check|INFO|verify_proxy_handle.py:75 
+<===================Check proxy in db================================>
+2015-11-20 18:02:03,503|139644605241088|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:02:03,510|139644594751232|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:02:03,527|139644584261376|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:02:03,633|139644654520064|proxy_check|INFO|thread_pool.py:47 Start thread num:500
+2015-11-20 18:02:03,772|139644628371200|proxy_check|INFO|proxy_check.py:73 Proxy 218.200.66.196:80 is available.
+2015-11-20 18:02:03,981|139644615730944|proxy_check|INFO|proxy_check.py:73 Proxy 220.248.224.242:8089 is available.
+2015-11-20 18:02:03,983|139644654520064|proxy_check|INFO|verify_proxy_handle.py:81 
+<===================Get and check proxy from proxy pool==============>
+2015-11-20 18:02:04,141|139644654520064|proxy_check|INFO|proxy_get.py:47 Get proxy success, proxy num[5].
+2015-11-20 18:02:04,173|139644594751232|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:02:04,262|139644654520064|proxy_check|INFO|thread_pool.py:47 Start thread num:500
+2015-11-20 18:02:09,172|139644573771520|proxy_check|WARNING|proxy_check.py:38 Proxy 113.200.220.43:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 18:02:09,174|139644615730944|proxy_check|WARNING|proxy_check.py:38 Proxy 171.38.24.248:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 18:02:09,175|139644628371200|proxy_check|WARNING|proxy_check.py:38 Proxy 171.38.24.248:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 18:02:09,176|139644605241088|proxy_check|WARNING|proxy_check.py:38 Proxy 221.179.236.58:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 18:02:09,182|139644654520064|proxy_check|INFO|verify_proxy_handle.py:89 
+<===================Save proxy info to db============================>
+2015-11-20 18:02:09,265|139644654520064|proxy_check|INFO|db_proxy_handler.py:83 Save 3 proxy into db[host:192.168.64.18, db:test]
+2015-11-20 18:02:09,298|139644654520064|proxy_check|INFO|db_proxy_handler.py:112 Delete 3 invalid proxy from db[host:192.168.64.18, db:test]
+2015-11-20 18:02:09,299|139644654520064|proxy_check|INFO|verify_proxy_handle.py:101 Proxy check interval:5, check thread num:500.
+2015-11-20 18:14:23,188|139809333286656|proxy_check|INFO|verify_proxy_handle.py:75 
+<===================Check proxy in db================================>
+2015-11-20 18:14:23,241|139809307133696|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:14:23,349|139809333286656|proxy_check|INFO|thread_pool.py:47 Start thread num:500
+2015-11-20 18:14:23,354|139809333286656|proxy_check|INFO|verify_proxy_handle.py:81 
+<===================Get and check proxy from proxy pool==============>
+2015-11-20 18:14:23,517|139809333286656|proxy_check|INFO|proxy_get.py:47 Get proxy success, proxy num[3].
+2015-11-20 18:14:23,549|139809284003584|proxy_check|INFO|verify_proxy_handle.py:37 Proxy list need to be checked is empty, stop all threads.
+2015-11-20 18:14:23,722|139809333286656|proxy_check|INFO|thread_pool.py:47 Start thread num:500
+2015-11-20 18:14:28,552|139809294493440|proxy_check|WARNING|proxy_check.py:38 Proxy 221.179.236.58:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 18:14:28,552|139809307133696|proxy_check|WARNING|proxy_check.py:38 Proxy 113.200.220.43:8123 is unavailable, error[<urlopen error timed out>].
+2015-11-20 18:14:28,558|139809333286656|proxy_check|INFO|verify_proxy_handle.py:89 
+<===================Save proxy info to db============================>
+2015-11-20 18:14:28,615|139809333286656|proxy_check|INFO|db_proxy_handler.py:83 Save 2 proxy into db[host:192.168.64.18, db:test]
+2015-11-20 18:14:28,657|139809333286656|proxy_check|INFO|db_proxy_handler.py:112 Delete 4 invalid proxy from db[host:192.168.64.18, db:test]
+2015-11-20 18:14:28,658|139809333286656|proxy_check|INFO|verify_proxy_handle.py:101 Proxy check interval:5, check thread num:500.
