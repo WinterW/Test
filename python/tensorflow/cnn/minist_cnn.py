@@ -112,8 +112,8 @@ for i in range(FLAGS.max_steps):
   if i%100 == 0:
     train_accuracy = accuracy.eval(feed_dict={
         x:batch[0], y_: batch[1], keep_prob: 1.0}) #feed_dict用于传入变量的值，变量名前面用palceholder占位，在计算时通过feed_dict传入
-    #summary = sess.run(merged, feed_dict=feed_dict(False))
-    #test_writer.add_summary(summary, i)
+    summary = sess.run(merged, feed_dict=feed_dict(False))
+    test_writer.add_summary(summary, i)
     print ("step %d, training accuracy %g"%(i, train_accuracy))
   train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
 
